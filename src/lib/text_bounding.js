@@ -41,18 +41,15 @@ function singleLineTextBoundingBox(textObj) {
   // it just snaps to the top of the SVG wrapper
   // The formula comes from curve fitting tool in Matlab
   // https://img.alicdn.com/tps/TB1CJu.PpXXXXXcaXXXXXXXXXXX-2053-1236.jpg
-  return {
+  var result = {
     top: y - Math.round(0.8808 * fontSize - 0.3333),
     left: x,
     width: (unicodeLength / 2) * fontSize + (textObj.text.length - 1) * letterSpacing,
     height: fontSize,
-    _init: function () {
-      delete this._init;
-      this.right = this.left + this.width;
-      this.bottom = this.top + this.height;
-      return this;
-    },
-  }._init();
+  };
+  result.right = result.left + result.width;
+  result.bottom = result.top + result.height;
+  return result;
 }
 
 function multiLineTextBoundingBox(textObj) {
@@ -87,18 +84,15 @@ function multiLineTextBoundingBox(textObj) {
     }
   });
 
-  return {
+  var result = {
     left: matrix.e(1, 1) * left + matrix.e(1, 2) * top + matrix.e(1, 3),
     top: matrix.e(2, 1) * left + matrix.e(2, 2) * top + matrix.e(2, 3) - Math.round(0.8808 * firstLineFontSize - 0.3333),
     right: matrix.e(1, 1) * right + matrix.e(1, 2) * bottom + matrix.e(1, 3),
     bottom: matrix.e(2, 1) * right + matrix.e(2, 2) * bottom + matrix.e(2, 3) - Math.round(0.8808 * firstLineFontSize - 0.3333),
-    _wh: function () {
-      delete this._wh;
-      this.width = this.right - this.left;
-      this.height = this.bottom - this.top;
-      return this;
-    },
-  }._wh();
+  };
+  result.width = result.right - result.left;
+  result.height = result.bottom - result.top;
+  return result;
 }
 
 export default textBoundingBox;

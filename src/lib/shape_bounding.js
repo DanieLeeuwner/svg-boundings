@@ -114,18 +114,15 @@ function boundingRectOfEllipse(ellipse, shouldReturnTrueBounding) {
       var tb2 = (0 - b1 - Math.sqrt(d1)) / (2 * a);
       var lr1 = (0 - b2 + Math.sqrt(d2)) / (2 * a);
       var lr2 = (0 - b2 - Math.sqrt(d2)) / (2 * a);
-      return {
+      var result = {
         left: Math.min(lr1, lr2),
         top: Math.min(tb1, tb2),
         right: Math.max(lr1, lr2),
         bottom: Math.max(tb1, tb2),
-        _wh: function () {
-          delete this._wh;
-          this.width = this.right - this.left;
-          this.height = this.bottom - this.top;
-          return this;
-        },
-      }._wh();
+      };
+      result.width = result.right - result.left;
+      result.height = result.bottom - result.top;
+      return result;
     } else return Helper.boundingUnderTransform(matrix, t, r, b, l);
   }
 

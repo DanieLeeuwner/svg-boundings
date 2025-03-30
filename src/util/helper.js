@@ -1,4 +1,5 @@
 import Matrix from "./matrix";
+
 var RE_TRANSFORM_TYPE = /(matrix|translate|scale|rotate|skewX|skewY)\s*\(([^)]+)\)/g;
 var Helper = {
   /**
@@ -87,18 +88,15 @@ var Helper = {
     var br_r = ma * r + mc * b + me;
     var br_b = mb * r + md * b + mf;
 
-    return {
+    var result = {
       top: Math.min(tl_t, tr_t, bl_b, br_b),
       bottom: Math.max(tl_t, tr_t, bl_b, br_b),
       left: Math.min(tl_l, tr_r, bl_l, br_r),
       right: Math.max(tl_l, tr_r, bl_l, br_r),
-      _wh: function () {
-        delete this._wh;
-        this.width = this.right - this.left;
-        this.height = this.bottom - this.top;
-        return this;
-      },
-    }._wh();
+    };
+    result.width = result.right - result.left;
+    result.height = result.bottom - result.top;
+    return result;
   },
 };
 
