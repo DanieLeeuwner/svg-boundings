@@ -1,7 +1,5 @@
-'use strict';
-
 var Num = {
-  round: function(number, decimals) {
+  round: function (number, decimals) {
     if (!decimals) decimals = 0;
     var scientificNotation = /e([-+]?\d+)/.exec(number);
     /**
@@ -15,8 +13,8 @@ var Num = {
       if (exponent > 0) return number;
       else return 0;
     }
-    return Number(Math.round(number+'e'+decimals)+'e-'+decimals);
+    return Number(Math.round(number + "e" + decimals) + "e-" + decimals);
   },
 };
 
-module.exports = Num;
+export default Num;

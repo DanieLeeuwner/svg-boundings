@@ -1,11 +1,9 @@
-'use strict';
+import boundingOfImage from "./lib/image_bounding";
+import boundingOfShape from "./lib/shape_bounding";
+import boundingOfText from "./lib/text_bounding";
+import boundingOfGradient from "./lib/gradient_bounding";
 
-var boundingOfImage = require('./lib/image_bounding');
-var boundingOfShape = require('./lib/shape_bounding');
-var boundingOfText = require('./lib/text_bounding');
-var boundingOfGradient = require('./lib/gradient_bounding');
-
-module.exports = {
+export default {
   line: boundingOfShape.line,
   rect: boundingOfShape.rect,
   circle: boundingOfShape.circle,
@@ -16,5 +14,5 @@ module.exports = {
   shape: boundingOfShape.shape,
   image: boundingOfImage,
   text: boundingOfText,
-  gradient: boundingOfGradient
+  gradient: boundingOfGradient,
 };
